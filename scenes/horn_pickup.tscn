@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8l3yp180gndm"]
+
+[ext_resource type="Texture2D" uid="uid://bdjl1rpa4scfb" path="res://assets/16x16 RPG Item Pack/Item__71.png" id="1_48xfc"]
+[ext_resource type="Script" uid="uid://cpt6f2qtafro4" path="res://scripts/horn_pickup.gd" id="1_crdka"]
+[ext_resource type="AudioStream" uid="uid://c5d4x3dr52cib" path="res://assets/SFX/keys_pickup-trimmed.mp3" id="3_rcqh1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_48xfc"]
+radius = 6.0
+
+[sub_resource type="Gradient" id="Gradient_crdka"]
+offsets = PackedFloat32Array(0, 0.798701)
+colors = PackedColorArray(0.815802, 0.539651, 0.0598606, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rcqh1"]
+gradient = SubResource("Gradient_crdka")
+fill = 1
+fill_from = Vector2(0.541284, 0.509174)
+
+[node name="HornPickup" type="Area2D"]
+script = ExtResource("1_crdka")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_48xfc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_48xfc")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(9.53674e-07, 0)
+scale = Vector2(0.25, 0.25)
+texture = SubResource("GradientTexture2D_rcqh1")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rcqh1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

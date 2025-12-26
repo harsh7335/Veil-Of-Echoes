@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcan257wlv4g1"]
+
+[ext_resource type="Script" uid="uid://bvcrvpjmcyugm" path="res://scripts/sound_wave.gd" id="1_e7q6v"]
+[ext_resource type="AudioStream" uid="uid://dko8mjawkgiij" path="res://assets/SFX/sonar-sound-effect.mp3" id="2_a64uu"]
+
+[sub_resource type="Gradient" id="Gradient_qiw5o"]
+offsets = PackedFloat32Array(0, 0.512987, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e7q6v"]
+gradient = SubResource("Gradient_qiw5o")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e7q6v"]
+radius = 32.0
+
+[node name="SoundWave" type="Node2D"]
+script = ExtResource("1_e7q6v")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture_filter = 2
+energy = 4.0
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 0.7
+texture = SubResource("GradientTexture2D_e7q6v")
+
+[node name="Area2D" type="Area2D" parent="." groups=["sound_wave"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_e7q6v")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_a64uu")
+volume_db = -6.0
+autoplay = true

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://3f7w63lc1vts"]
+
+[ext_resource type="AudioStream" uid="uid://ma24vmo3wa7d" path="res://assets/SFX/dark-drone-sound-7543_trimmed.mp3" id="1_8qd8g"]
+[ext_resource type="Script" uid="uid://bb3osadwlkanj" path="res://scripts/audio_manager.gd" id="1_liach"]
+
+[node name="AudioManager" type="Node2D"]
+script = ExtResource("1_liach")
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_8qd8g")
+volume_db = -20.0
+autoplay = true
+bus = &"Music"
+
+[node name="SpookySfx" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[node name="SpookyTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="SpookyTimer" to="." method="_on_spooky_timer_timeout"]
